@@ -1,0 +1,32 @@
+name: dev
+on:
+  push:
+    branches: [ deploy ]
+    paths:
+      - '**/dev/**hello-kubernetes-deployment.yaml'
+  pull_request:
+    branches: [ deploy ]
+    paths:
+      - '**/dev/**hello-kubernetes-deployment.yaml'
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: self-hosted
+    steps: 
+    - uses: actions/checkout@v2
+      with:
+        ref: deploy
+    - uses: actions/download-artifact@v2
+    - name: Run a one-line script
+      run: echo Hello, world world !
+    - name: Run a multi-line script
+      run: |
+        touch /tmp/ENTORNO_DE_DESPLIEGUE.txt
+        echo DESPLIEGUE DES: ${{ github.workflow }} : $APLICACION $FECHA $FICHERO >> /tmp/ENTORNO_DE_DESPLIEGUE.txt
+        echo en malla ENTORNO: ${{ github.workflow }} - ${{ github.event_name }} -  ${{ github.workspace }} - ${{ github.actions.path }}
+  
+      env: 
+        APLICACION: ejemplo_aplicacion
+        FECHA: The
+        FICHERO: hello-kubernetes-deployment.yaml
