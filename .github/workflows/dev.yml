@@ -27,6 +27,6 @@ jobs:
         echo en malla ENTORNO: ${{ github.workflow }} - ${{ github.event_name }} -  ${{ github.workspace }} - ${{ github.actions.path }}
   
       env: 
-        APLICACION: ejemplo_aplicacion
+        APLICACION: app_des_3
         FECHA: The
         FICHERO: hello-kubernetes-deployment.yaml
