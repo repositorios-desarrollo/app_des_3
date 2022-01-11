@@ -3,11 +3,11 @@ on:
   push:
     branches: [ deploy ]
     paths:
-      - '**/dev/**hello-kubernetes-deployment.yaml'
+      - '**/dev/**.yaml'
   pull_request:
     branches: [ deploy ]
     paths:
-      - '**/dev/**hello-kubernetes-deployment.yaml'
+      - '**/dev/**.yaml'
   workflow_dispatch:
   
 jobs:
