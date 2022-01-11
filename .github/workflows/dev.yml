@@ -25,8 +25,10 @@ jobs:
         touch /tmp/ENTORNO_DE_DESPLIEGUE.txt
         echo DESPLIEGUE DES: ${{ github.workflow }} : $APLICACION $FECHA $FICHERO >> /tmp/ENTORNO_DE_DESPLIEGUE.txt
         echo en malla ENTORNO: ${{ github.workflow }} - ${{ github.event_name }} -  ${{ github.workspace }} - ${{ github.actions.path }}
-  
-      env: 
+        /opt/GitActions/scripts/Deploy.sh "${{ github.workspace }}/environments/${{ github.workflow }}/own/$PRODUCTO/$APLICACION" "${{ github.workflow }}" "$PRODUCTO" "$APLICACION" "$COMENTARIO"
+      env:
+        PRODUCTO: devops
         APLICACION: app_des_3
+        COMENTARIO: version dos tres cuatro
         FECHA: The
         FICHERO: hello-kubernetes-deployment.yaml
