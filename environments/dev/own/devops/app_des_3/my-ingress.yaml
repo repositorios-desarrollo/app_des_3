@@ -2,9 +2,11 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: my-ingress
+  annotations:
+    konghq.com/strip-path: "true"
 spec:
   rules:
-  - host: mallatomcat.nemovil.com          
+  - host: mallatomcat.nemovil.com
     http:
       paths:
       - path: /*
@@ -19,7 +21,7 @@ spec:
         backend:
           serviceName: hello-manolo
           servicePort: 60000
-  - host: mallaelastic.nemovil.com          
+  - host: mallaelastic.nemovil.com
     http:
       paths:
       - path: /*
@@ -37,7 +39,7 @@ spec:
       - path: /new_balance
         backend:
           serviceName: hello-new-balance
-          servicePort: 60000        
+          servicePort: 60000
   - http:
       paths:
       - path: /*
