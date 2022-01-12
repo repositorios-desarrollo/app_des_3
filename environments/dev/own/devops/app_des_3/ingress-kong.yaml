@@ -16,4 +16,32 @@ spec:
             name: proxy-to-httpbin
             port:
               number: 80
-              
+      - path: /kube
+        pathType: ImplementationSpecific      
+        backend:
+          service:
+            name: hello-kubernete
+            port:
+              number: 80
+      - path: /manolo
+        pathType: ImplementationSpecific      
+        backend:
+          service:
+            name: hello-manolo
+            port:
+              number: 60000
+      - path: /hello-world
+        pathType: ImplementationSpecific   
+        backend:
+          service:
+            name: hello-world
+            port:
+              number: 60000
+      - path: /hello-new-balance
+        pathType: ImplementationSpecific       
+        backend:
+          service:
+            name: hello-new-balance
+            port:
+              number: 60000            
+ 
