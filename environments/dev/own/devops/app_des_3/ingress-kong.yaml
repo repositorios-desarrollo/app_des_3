@@ -22,7 +22,7 @@ spec:
           service:
             name: hello-kubernete
             port:
-              number: 80
+              number: 8080
       - path: /manolo
         pathType: ImplementationSpecific      
         backend:
