@@ -7,6 +7,16 @@ metadata:
 spec:
   ingressClassName: kong
   rules:
+  - host: mallakibana.nemovil.com
+    http:
+      paths:
+      - path: /kube
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: hello-manolo
+            port:
+              number: 60000
   - http:
       paths:
       - path: /foo
