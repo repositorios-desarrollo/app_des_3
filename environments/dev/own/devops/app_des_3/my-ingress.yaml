@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  rules:
+  - host: mallatomcat.nemovil.com          
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: hello-world
+          servicePort: 60000
+      - path: /kube
+        backend:
+          serviceName: hello-kubernetes
+          servicePort: 80
+      - path: /manolo
+        backend:
+          serviceName: hello-manolo
+          servicePort: 60000
+  - host: mallaelastic.nemovil.com          
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: hello-world
+          servicePort: 60000
+      - path: /kube
+        backend:
+          serviceName: hello-kubernetes
+          servicePort: 80
+      - path: /manolo
+        backend:
+          serviceName: hello-manolo
+          servicePort: 60000
+      - path: /new_balance
+        backend:
+          serviceName: hello-new-balance
+          servicePort: 60000        
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: hello-world
+          servicePort: 60000
+      - path: /kube
+        backend:
+          serviceName: hello-kubernetes
+          servicePort: 80
+      - path: /manolo
+        backend:
+          serviceName: hello-manolo
+          servicePort: 60000
