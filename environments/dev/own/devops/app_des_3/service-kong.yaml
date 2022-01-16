@@ -7,4 +7,4 @@ spec:
   - protocol: TCP
     port: 80
   type: ExternalName
-  externalName: www.google.com
+  externalName: www.yahoo.com
