@@ -2,7 +2,7 @@ name: deploy-argocd-entorno
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '**/deploy/**/entorno/**'
 
@@ -16,15 +16,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: master
+        ref: main
 
     # Selecioamos entorno dependiendo de la ruta donde se ha llevado
     # a cabo el cambio.
     - uses: dorny/paths-filter@v2
       id: changes
       with:
-        ref: master
-        base: master
+        ref: main
+        base: main
         filters: |
           entorno:
             - '**/deploy/**/entorno/**'
@@ -34,8 +34,8 @@ jobs:
     - uses: dorny/paths-filter@v2
       id: productoservicio
       with:
-        ref: master
-        base: master
+        ref: main
+        base: main
         filters: |
           producto-servicio:
             - 'deploy/cliente/producto/servicio/**'
