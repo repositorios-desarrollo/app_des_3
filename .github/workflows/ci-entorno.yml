@@ -72,20 +72,20 @@ jobs:
         echo "TAG_IMAGEN=$TAG_IMAGEN" >> $GITHUB_ENV
       # BACKUP_VELERO:     # Tipos:  YAML: solo yaml - SNAPSHOP: solo snapshop - ALL: yaml y snapsh
 
-    - name: Cambiamos TAGS de la IMAGEN
-      run: |
-        cd  ${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}
-        sed -i "s|TAG_IMAGEN|${{ env.TAG_IMAGEN }}|g" service-deployment.yaml
-
-    - name: Run Deploy script
-      run: |
-        FECHA=`date "+%Y-%m-%d %H:%M:%S"`
-        echo "   ------------------------------------------------------------------" >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
-        echo $FECHA >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
-        echo DESPLIEGUE ${{ env.ENTORNO }} : $GITHUB_REPOSITORY : ${{ env.PRODUCT_NAME }} : ${{ env.SERVICE_NAME }} >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
-        echo En controller ENTORNO: $GITHUB_REPOSITORY - ${{ env.ENTORNO }} - ${{ github.event_name }} -  ${{ github.workspace }} - ${{ github.actions.path }} - $RUNNER_NAME
-        echo "/opt/devops/githup/scripts/SendDeploy.sh \"Deploy.sh\" \"${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}\" \"${{ env.CLIENT_NAME }}\" \"${{ env.PRODUCT_NAME }}\" \"${{ env.SERVICE_NAME }}\" \"${{ env.ENTORNO }}\" \"$GITHUB_REPOSITORY\" \"$RUNNER_NAME\"" >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
-        echo " RUNNER: $RUNNER_NAME " >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
-        /opt/devops/githup/scripts/SendDeploy.sh "Deploy.sh" "${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}/" "${{ env.CLIENT_NAME }}" "${{ env.PRODUCT_NAME }}" "${{ env.SERVICE_NAME }}" "${{ env.ENTORNO }}" "$GITHUB_REPOSITORY" "$RUNNER_NAME"
-    - name: Run a one-line script
-      run: echo End Deploy !
+    #- name: Cambiamos TAGS de la IMAGEN
+    #  run: |
+    #    cd  ${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}
+    #    sed -i "s|TAG_IMAGEN|${{ env.TAG_IMAGEN }}|g" service-deployment.yaml
+#
+    #- name: Run Deploy script
+    #  run: |
+    #    FECHA=`date "+%Y-%m-%d %H:%M:%S"`
+    #    echo "   ------------------------------------------------------------------" >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    echo $FECHA >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    echo DESPLIEGUE ${{ env.ENTORNO }} : $GITHUB_REPOSITORY : ${{ env.PRODUCT_NAME }} : ${{ env.SERVICE_NAME }} >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    echo En controller ENTORNO: $GITHUB_REPOSITORY - ${{ env.ENTORNO }} - ${{ github.event_name }} -  ${{ github.workspace }} - ${{ github.actions.path }} - $RUNNER_NAME
+    #    echo "/opt/devops/githup/scripts/SendDeploy.sh \"Deploy.sh\" \"${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}\" \"${{ env.CLIENT_NAME }}\" \"${{ env.PRODUCT_NAME }}\" \"${{ env.SERVICE_NAME }}\" \"${{ env.ENTORNO }}\" \"$GITHUB_REPOSITORY\" \"$RUNNER_NAME\"" >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    echo " RUNNER: $RUNNER_NAME " >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    /opt/devops/githup/scripts/SendDeploy.sh "Deploy.sh" "${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}/" "${{ env.CLIENT_NAME }}" "${{ env.PRODUCT_NAME }}" "${{ env.SERVICE_NAME }}" "${{ env.ENTORNO }}" "$GITHUB_REPOSITORY" "$RUNNER_NAME"
+    #- name: Run a one-line script
+    #  run: echo End Deploy !
