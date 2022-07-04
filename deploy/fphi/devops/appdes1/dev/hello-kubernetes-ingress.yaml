@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-kubernetes-ingress
+  annotations:
+    konghq.com/strip-path: "true"
+spec:
+  ingressClassName: kong
+  rules:
+  - host: pruebas.cross.facephi.app
+    http:
+      paths:
+      - path: /kube
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: hello-kubernetes-service
+            port:
+              number: 9090
+  - host: pruebas.argocd.cross.facephi.app
+    http:
+      paths:
+      - path: /kube
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: hello-kubernetes-service
+            port:
+              number: 8080
