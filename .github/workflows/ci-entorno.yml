@@ -1,17 +1,17 @@
-name: deploy-argocd-dev
+name: deploy-argocd-entorno
 
 on:
   push:
     branches: [ master ]
     paths:
-      - '**/deploy/**/dev/**'
+      - '**/deploy/**/entorno/**'
 
   workflow_dispatch:
 
 jobs:
 
   build:
-    runs-on: [ self-hosted, argo]
+    runs-on: [ self-hosted, repositorios-desarrollo]
 
     steps:
     - uses: actions/checkout@v2
@@ -26,8 +26,8 @@ jobs:
         ref: master
         base: master
         filters: |
-          dev:
-            - '**/deploy/**/dev/**'
+          entorno:
+            - '**/deploy/**/entorno/**'
 
     # Añadimos PRODUCTO-SERVICIOS y su ruta correspondiente
     # Añadir tambien en (*)
@@ -37,24 +37,24 @@ jobs:
         ref: master
         base: master
         filters: |
-          selphid-memb:
-            - 'deploy/aen/selphid/memb/**'
+          producto-servicio:
+            - 'deploy/cliente/producto/servicio/**'
 
     - name: Run a one-line script
       run: echo Start Deploy !
 
 
 
-    - name: Set DEV env variables
-      if: steps.changes.outputs.dev == 'true'
+    - name: Set ENTORNO env variables
+      if: steps.changes.outputs.entorno == 'true'
       run: |
-          echo "ENTORNO=dev" >> $GITHUB_ENV
+          echo "ENTORNO=entorno" >> $GITHUB_ENV
 
     # (*)
     - name: Set PRODUCTO_SERVICIO variables
-      if: steps.productoservicio.outputs.selphid-memb == 'true'
+      if: steps.productoservicio.outputs.producto-servicio == 'true'
       run: |
-          echo "PRODUCTO_SERVICIO=deploy/aen/selphid/memb" >> $GITHUB_ENV
+          echo "PRODUCTO_SERVICIO=deploy/cliente/producto/servicio" >> $GITHUB_ENV
 
 
 
