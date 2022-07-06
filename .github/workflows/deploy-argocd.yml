@@ -11,7 +11,7 @@ on:
 jobs:
 
   build:
-    runs-on: [ self-hosted, actions-runner ]
+    runs-on: [ self-hosted, repositorios-desarrollo ]
 
     steps:
     - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
         ref: main
 
     # Selecioamos entorno dependiendo de la ruta donde se ha llevado
-    # a cabo el cambio.
+    ## a cabo el cambio.
     - uses: dorny/paths-filter@v2
       id: changes
       with:
