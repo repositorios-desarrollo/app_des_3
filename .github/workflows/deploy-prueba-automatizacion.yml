@@ -77,7 +77,7 @@ jobs:
     #  run: |
     #    cd  ${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}
     #    sed -i "s|TAG_IMAGEN|${{ env.TAG_IMAGEN }}|g" service-deployment.yaml
-#
+    #
     #- name: Run Deploy script
     #  run: |
     #    FECHA=`date "+%Y-%m-%d %H:%M:%S"`
