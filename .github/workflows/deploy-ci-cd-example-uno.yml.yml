@@ -39,7 +39,7 @@ jobs:
         base: main
         filters: |
           producto-servicio:
-            - 'deploy/fphi/devops/ci-cd-example-uno/dev'
+            - '**/deploy/fphi/devops/ci-cd-example-uno/dev/**'
 
     - name: Run a one-line script
       run: echo Start Deploy !
