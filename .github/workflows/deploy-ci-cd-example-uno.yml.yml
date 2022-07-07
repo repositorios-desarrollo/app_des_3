@@ -49,7 +49,7 @@ jobs:
     - name: Set ENTORNO env variables
       if: steps.changes.outputs.entorno == 'true'
       run: |
-          echo "ENTORNO=entorno" >> $GITHUB_ENV
+          echo "ENTORNO=dev" >> $GITHUB_ENV
 
     # (*)
     - name: Set PRODUCTO_SERVICIO variables

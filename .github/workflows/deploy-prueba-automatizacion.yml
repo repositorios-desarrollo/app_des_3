@@ -2,7 +2,7 @@ name: deploy-prueba-automatizacion
 
 on:
   push:
-    branches: [ deploy ]
+    branches: [ main ]
     paths:
       - '**/deploy/**/entorno/**'
 
