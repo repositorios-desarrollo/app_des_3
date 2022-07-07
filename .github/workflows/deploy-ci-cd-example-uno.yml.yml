@@ -73,10 +73,10 @@ jobs:
         echo "TAG_IMAGEN=$TAG_IMAGEN" >> $GITHUB_ENV
       # BACKUP_VELERO:     # Tipos:  YAML: solo yaml - SNAPSHOP: solo snapshop - ALL: yaml y snapsh
 
-    - name: Cambiamos TAGS de la IMAGEN
-      run: |
-        cd  ${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}
-        sed -i "s|TAG_IMAGEN|${{ env.TAG_IMAGEN }}|g" service-deployment.yaml
+    #- name: Cambiamos TAGS de la IMAGEN
+    #  run: |
+    #    cd  ${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}
+    #    sed -i "s|TAG_IMAGEN|${{ env.TAG_IMAGEN }}|g" service-deployment.yaml
 
     - name: Run Deploy script
       run: |
