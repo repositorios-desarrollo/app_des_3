@@ -1,0 +1,92 @@
+name: deploy-prueba-automatizacion
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/deploy/**/entorno/**'
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    #runs-on: [ self-hosted ]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: main
+
+    # Selecioamos entorno dependiendo de la ruta donde se ha llevado
+    ## a cabo el cambio.
+    - uses: dorny/paths-filter@v2
+      id: changes
+      with:
+        ref: main
+        base: main
+        filters: |
+          entorno:
+            - '**/deploy/**/entorno/**'
+
+    # Añadimos PRODUCTO-SERVICIOS y su ruta correspondiente
+    # Añadir tambien en (*)
+    - uses: dorny/paths-filter@v2
+      id: productoservicio
+      with:
+        ref: main
+        base: main
+        filters: |
+          producto-servicio:
+            - 'deploy/cliente/producto/servicio/**'
+
+    - name: Run a one-line script
+      run: echo Start Deploy !
+
+
+
+    - name: Set ENTORNO env variables
+      if: steps.changes.outputs.entorno == 'true'
+      run: |
+          echo "ENTORNO=entorno" >> $GITHUB_ENV
+
+    # (*)
+    - name: Set PRODUCTO_SERVICIO variables
+      if: steps.productoservicio.outputs.producto-servicio == 'true'
+      run: |
+          echo "PRODUCTO_SERVICIO=deploy/cliente/producto/servicio" >> $GITHUB_ENV
+
+
+
+    - name: Read service name and version
+      run: |
+        CLIENT_NAME=$(cat ${{ env.PRODUCTO_SERVICIO }}/CLIENT_NAME)
+        PRODUCT_NAME=$(cat ${{ env.PRODUCTO_SERVICIO }}/PRODUCT_NAME)
+        SERVICE_NAME=$(cat ${{ env.PRODUCTO_SERVICIO }}/SERVICE_NAME)
+        VERSION=$(cat ${{ env.PRODUCTO_SERVICIO }}/VERSION)
+        TAG_IMAGEN=$(cat ${{ env.PRODUCTO_SERVICIO }}/${{ env.ENTORNO }}/DOCKER_TAG)
+        echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
+        echo "PRODUCT_NAME=$PRODUCT_NAME" >> $GITHUB_ENV
+        echo "SERVICE_NAME=$SERVICE_NAME" >> $GITHUB_ENV
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "TAG_IMAGEN=$TAG_IMAGEN" >> $GITHUB_ENV
+      # BACKUP_VELERO:     # Tipos:  YAML: solo yaml - SNAPSHOP: solo snapshop - ALL: yaml y snapsh
+
+    #- name: Cambiamos TAGS de la IMAGEN
+    #  run: |
+    #    cd  ${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}
+    #    sed -i "s|TAG_IMAGEN|${{ env.TAG_IMAGEN }}|g" service-deployment.yaml
+#
+    #- name: Run Deploy script
+    #  run: |
+    #    FECHA=`date "+%Y-%m-%d %H:%M:%S"`
+    #    echo "   ------------------------------------------------------------------" >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    echo $FECHA >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    echo DESPLIEGUE ${{ env.ENTORNO }} : $GITHUB_REPOSITORY : ${{ env.PRODUCT_NAME }} : ${{ env.SERVICE_NAME }} >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    echo En controller ENTORNO: $GITHUB_REPOSITORY - ${{ env.ENTORNO }} - ${{ github.event_name }} -  ${{ github.workspace }} - ${{ github.actions.path }} - $RUNNER_NAME
+    #    echo "/opt/devops/githup/scripts/SendDeploy.sh \"Deploy.sh\" \"${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}\" \"${{ env.CLIENT_NAME }}\" \"${{ env.PRODUCT_NAME }}\" \"${{ env.SERVICE_NAME }}\" \"${{ env.ENTORNO }}\" \"$GITHUB_REPOSITORY\" \"$RUNNER_NAME\"" >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    echo " RUNNER: $RUNNER_NAME " >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
+    #    /opt/devops/githup/scripts/SendDeploy.sh "Deploy.sh" "${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}/" "${{ env.CLIENT_NAME }}" "${{ env.PRODUCT_NAME }}" "${{ env.SERVICE_NAME }}" "${{ env.ENTORNO }}" "$GITHUB_REPOSITORY" "$RUNNER_NAME"
+    #- name: Run a one-line script
+    #  run: echo End Deploy !
