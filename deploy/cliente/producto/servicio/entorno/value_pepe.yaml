@@ -1,4 +1,7 @@
-1
-2
-3
-4
+values: |
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 70
+    # targetMemoryUtilizationPercentage: 70
