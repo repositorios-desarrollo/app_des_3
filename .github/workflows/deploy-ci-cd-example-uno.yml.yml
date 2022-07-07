@@ -78,6 +78,11 @@ jobs:
     #    cd  ${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}
     #    sed -i "s|TAG_IMAGEN|${{ env.TAG_IMAGEN }}|g" service-deployment.yaml
 
+    #
+    #  PARA QUE FUNCIONE HAYQ UE LANZAR:
+    #
+    #   /admops/devops/githup/products/repositorios-desarrollo/actions-runner-app_des_3/RUN.SH  CON "admops"
+    #
     - name: Run Deploy script
       run: |
         FECHA=`date "+%Y-%m-%d %H:%M:%S"`
