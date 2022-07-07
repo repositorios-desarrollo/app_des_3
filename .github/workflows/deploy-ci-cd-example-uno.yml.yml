@@ -87,6 +87,6 @@ jobs:
         echo En controller ENTORNO: $GITHUB_REPOSITORY - ${{ env.ENTORNO }} - ${{ github.event_name }} -  ${{ github.workspace }} - ${{ github.actions.path }} - $RUNNER_NAME
         echo "/opt/devops/githup/scripts/SendDeploy.sh \"Deploy.sh\" \"${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}\" \"${{ env.CLIENT_NAME }}\" \"${{ env.PRODUCT_NAME }}\" \"${{ env.SERVICE_NAME }}\" \"${{ env.ENTORNO }}\" \"$GITHUB_REPOSITORY\" \"$RUNNER_NAME\"" >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
         echo " RUNNER: $RUNNER_NAME " >> /opt/devops/githup/scripts/logs/ENTORNO_DE_DESPLIEGUE_${{ env.ENTORNO }}.logs
-    #    echo /opt/devops/githup/scripts/SendDeploy.sh "Deploy.sh" "${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}/" "${{ env.CLIENT_NAME }}" "${{ env.PRODUCT_NAME }}" "${{ env.SERVICE_NAME }}" "${{ env.ENTORNO }}" "$GITHUB_REPOSITORY" "$RUNNER_NAME"
+        /opt/devops/githup/scripts/SendDeploy.sh "Deploy.sh" "${{ github.workspace }}/deploy/${{ env.CLIENT_NAME }}/${{ env.PRODUCT_NAME }}/${{ env.SERVICE_NAME }}/${{ env.ENTORNO }}/" "${{ env.CLIENT_NAME }}" "${{ env.PRODUCT_NAME }}" "${{ env.SERVICE_NAME }}" "${{ env.ENTORNO }}" "$GITHUB_REPOSITORY" "$RUNNER_NAME"
     - name: Run a one-line script
       run: echo End Deploy !
