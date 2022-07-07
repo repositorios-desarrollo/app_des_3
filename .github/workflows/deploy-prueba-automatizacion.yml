@@ -39,7 +39,7 @@ jobs:
         base: main
         filters: |
           producto-servicio:
-            - 'deploy/cliente/producto/servicio/**'
+            - 'deploy/cliente/producto/servicio/dev/**'
 
     - name: Run a one-line script
       run: echo Start Deploy !
@@ -55,7 +55,7 @@ jobs:
     - name: Set PRODUCTO_SERVICIO variables
       if: steps.productoservicio.outputs.producto-servicio == 'true'
       run: |
-          echo "PRODUCTO_SERVICIO=deploy/cliente/producto/servicio" >> $GITHUB_ENV
+          echo "PRODUCTO_SERVICIO=deploy/cliente/producto/servicio/dev" >> $GITHUB_ENV
 
 
 
