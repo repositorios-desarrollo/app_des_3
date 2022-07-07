@@ -55,7 +55,7 @@ jobs:
     - name: Set PRODUCTO_SERVICIO variables
       if: steps.productoservicio.outputs.producto-servicio == 'true'
       run: |
-          echo "PRODUCTO_SERVICIO=deploy/cliente/producto/servicio" >> $GITHUB_ENV
+          echo "PRODUCTO_SERVICIO=deploy/fphi/devops/ci-cd-example-uno/dev" >> $GITHUB_ENV
 
 
 
